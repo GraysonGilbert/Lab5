@@ -92,7 +92,7 @@ class Stepper:
 myStepper = Stepper(0)
 
 try:
-  myStepper.goAngle(270)
+  myStepper.goAngle(90)
 except:
   pass
 GPIO.cleanup() 
