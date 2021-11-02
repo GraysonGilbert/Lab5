@@ -1,5 +1,10 @@
+#Importing all modules required for lab
 import RPi.GPIO as GPIO
 import time
+import smbus
+import json
+
+
 
 GPIO.setmode(GPIO.BCM)
 #STEPPER MOTOR SETUP
@@ -21,6 +26,31 @@ def delay_us(tus): # use microseconds to improve time resolution
   while time.time() < endTime:
     pass
 
+#ADC CLASS from lab 3
+class PCF8591:
+
+  def __init__(self,address):
+    self.bus = smbus.SMBus(1)
+    self.address = address
+
+  def read(self,chn): #channel
+      try:
+          self.bus.write_byte(self.address, 0x40 | chn)  # 01000000
+          self.bus.read_byte(self.address) # dummy read to start conversion
+      except Exception as e:
+          print ("Address: %s \n%s" % (self.address,e))
+      return self.bus.read_byte(self.address)
+
+  def write(self,val):
+      try:
+          self.bus.write_byte_data(self.address, 0x40, int(val))
+      except Exception as e:
+          print ("Error: Device address: 0x%2X \n%s" % (self.address,e))
+
+
+
+
+#STEPPER MOTOR CLASS
 class Stepper:
 
   def __init__(motor,angle):
@@ -86,7 +116,16 @@ class Stepper:
   def zero(motor,pin):
     #Turn the motor until the photoresistor is occluded by the cardboard piece
     GPIO.output(pin, 1)
-    time.sleep(1)
+    time.sleep(.5)
+    def loop(): 
+      PCF8591.setup(0x48)
+      while True:
+        print(PCF8591.read(0))
+        
+    
+        
+
+    
 
 
 
@@ -96,6 +135,6 @@ myStepper = Stepper(0)
 try:
   myStepper.goAngle(180)
   myStepper.zero(ledPin)
-except:
+except KeyboardInterrupt:
   pass
-GPIO.cleanup() 
+  
