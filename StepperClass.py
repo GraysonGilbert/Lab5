@@ -20,29 +20,32 @@ def delay_us(tus): # use microseconds to improve time resolution
   endTime = time.time() + float(tus)/ float(1E6)
   while time.time() < endTime:
     pass
+
+def halfstep(dir):
+  #dir = +/- 1 for cw or cw respectfully
+  global state
+  state = state + dir
+  if state > 7:
+    state = 0
+  if state < 0:
+    state = 7
+
+  for pin in range(4):    # 4 pins that need to be energized
+    GPIO.output(pins[pin],sequence[state][pin])
+  delay_us(1000)
+  
+def turnSteps(steps, dir):
+  #move the actuation sequence a given number of half steps
+  for step in range(steps):
+    halfstep(dir)
+
+
 class Stepper:
+  pass
 
-  def halfstep(dir):
-    #dir = +/- 1 for cw or cw respectfully
-    global state
-    state = state + dir
-    if state > 7:
-      state = 0
-    if state < 0:
-      state = 7
 
-    for pin in range(4):    # 4 pins that need to be energized
-      GPIO.output(pins[pin],sequence[state][pin])
-    delay_us(1000)
-    
-  def turnSteps(motor, steps, dir):
-    #move the actuation sequence a given number of half steps
-    for step in range(steps):
-      motor.halfstep(dir)
-
-myStepper = Stepper()
 try:
-  myStepper.turnSteps(4096,1)
+  turnSteps(4096,1)
 except:
   pass
 GPIO.cleanup() 
