@@ -83,9 +83,9 @@ class Stepper:
       motor.turnSteps(steps, dir)
 
 
-  def zero():
+  def zero(motor,pin):
     #Turn the motor until the photoresistor is occluded by the cardboard piece
-    GPIO.output(4, 1)
+    GPIO.output(pin, 1)
 
 
 
@@ -94,7 +94,7 @@ myStepper = Stepper(0)
 
 try:
   myStepper.goAngle(180)
-  myStepper.zero()
+  myStepper.zero(ledPin)
 except:
   pass
 GPIO.cleanup() 
