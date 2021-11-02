@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BCM)
-
+#STEPPER MOTOR SETUP
 pins = [18,21,22,23] # controller inputs: in1, in2, in3, in4
 for pin in pins:
   GPIO.setup(pin, GPIO.OUT, initial=0)
@@ -11,7 +11,9 @@ sequence = [ [1,0,0,0],[1,1,0,0],[0,1,0,0],[0,1,1,0],
       [0,0,1,0],[0,0,1,1],[0,0,0,1],[1,0,0,1] ]
 
 state = 0
-zero = 0
+
+#LED SETUP
+GPIO.setup(22, GPIO.out, initial = 0)
 
 def delay_us(tus): # use microseconds to improve time resolution
   endTime = time.time() + float(tus)/ float(1E6)
@@ -49,12 +51,11 @@ class Stepper:
     #0 and 360 degrees is at the 0 point located at led
 
     #steps:
-    # 1. read current angle
-    # 2. if desired angle - current angle <= 180 degrees, the move ccw towards angle. if it is > 180 degrees move cw towards final angle
-    # 3. steps required to move angle in ccw direction (direction 0) is (desired angle - current angle) / .703 
-    #3.5 if faster to move other way aka difference greater than 180, steps required is (360 - angle difference)/.703 in direction 0
-    # 4. call turnsteps with direction and number of steps to move to new location
-    # . update current angle
+    # 1. if desired angle - current angle <= 180 degrees, the move ccw towards angle. if it is > 180 degrees move cw towards final angle
+    # 2. steps required to move angle in ccw direction (direction 0) is 8 * (desired angle - current angle) / .703 
+    #3.5 if faster to move other way aka difference greater than 180, steps required is 8 * (360 - angle difference)/.703 in direction 0
+    # 3. call turnsteps with direction and number of steps to move to new location
+
     angle_diff = new_angle - motor.angle
     print(angle_diff)
 
@@ -81,11 +82,9 @@ class Stepper:
       motor.turnSteps(steps, dir)
 
 
-
-
-
-  #def zero():
+  def zero():
     #Turn the motor until the photoresistor is occluded by the cardboard piece
+
 
 
   
