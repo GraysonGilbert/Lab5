@@ -55,17 +55,30 @@ class Stepper:
     #3.5 if faster to move other way aka difference greater than 180, steps required is (360 - angle difference)/.703 in direction 0
     # 4. call turnsteps with direction and number of steps to move to new location
     # . update current angle
-    angle_diff = motor.angle - new_angle
+    angle_diff = new_angle - motor.angle
     print(angle_diff)
 
-    if angle_diff <= 180:
+    if angle_diff == 360 or angle_diff == -360:
+      dir = 1
+      steps = 0
+      motor.turnSteps(steps, dir)
+    elif angle_diff <= 180 and angle_diff > 0:
       dir = 1
       steps = int(angle_diff/0.703)
       motor.turnSteps(steps,dir)
-    if angle_diff > 180:
+    elif angle_diff > 180:
       dir = -1
       steps = int((360 - angle_diff)/.703)
       motor.turnSteps(steps, dir)
+    elif angle_diff < 0 and angle_diff >= -180:
+      dir = -1
+      steps = (abs(int(360 - angle_diff) / .703))
+      motor.turnSteps(steps, dir)
+    elif angle_diff < -180:
+      dir = 1
+      steps = int(angle_diff / 0.703)
+      motor.turnSteps(steps, dir)
+
 
 
 
@@ -75,10 +88,10 @@ class Stepper:
 
 
   
-myStepper = Stepper(pins)
+myStepper = Stepper(0)
 
 try:
-  myStepper.turnSteps(4096,1)
+  myStepper.goAngle(90)
 except:
   pass
 GPIO.cleanup() 
