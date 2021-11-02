@@ -13,7 +13,7 @@ sequence = [ [1,0,0,0],[1,1,0,0],[0,1,0,0],[0,1,1,0],
 state = 0
 
 #LED SETUP
-ledPin = 22
+ledPin = 4
 GPIO.setup(ledPin, GPIO.OUT, initial = 0)
 
 def delay_us(tus): # use microseconds to improve time resolution
@@ -85,7 +85,7 @@ class Stepper:
 
   def zero():
     #Turn the motor until the photoresistor is occluded by the cardboard piece
-    GPIO.output(22, 1)
+    GPIO.output(4, 1)
 
 
 
