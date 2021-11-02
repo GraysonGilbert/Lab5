@@ -104,7 +104,6 @@ class Stepper:
     elif angle_diff <= 180 and angle_diff > 0:
       dir = -1
       steps = 8 * int(angle_diff/0.703)
-      print("Turning steps")
       motor.turnSteps(steps,dir)
     elif angle_diff > 180:
       dir = 1
@@ -128,7 +127,7 @@ class Stepper:
       myLed = LedReading(0x48)
       brightness = myLed.ledBrightness()
       print(brightness)
-      if brightness > 25:
+      if brightness < 25:
         if motor.angle < 180:
           motor.turnSteps(1,1)
         else:
