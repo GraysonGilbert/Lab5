@@ -127,7 +127,7 @@ class Stepper:
       myLed = LedReading(0x48)
       brightness = myLed.ledBrightness()
       print(brightness)
-      if brightness < 25:
+      if brightness > 15:
         if motor.angle < 180:
           motor.turnSteps(1,1)
         else:
