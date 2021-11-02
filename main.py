@@ -136,6 +136,7 @@ class Stepper:
         GPIO.output(pin, 0)
         led_blocked = 1
         motor.angle = 0
+        print(motor.angle)
         
     
         
