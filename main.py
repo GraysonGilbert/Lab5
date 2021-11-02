@@ -85,7 +85,7 @@ class Stepper:
 
   def zero():
     #Turn the motor until the photoresistor is occluded by the cardboard piece
-    GPIO.output(ledPin, 1)
+    GPIO.output(22, 1)
 
 
 
