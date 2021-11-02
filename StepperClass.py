@@ -42,7 +42,7 @@ class Stepper:
 
 myStepper = Stepper()
 try:
-  turnSteps(4096,1)
+  myStepper.turnSteps(4096,1)
 except:
   pass
 GPIO.cleanup() 
