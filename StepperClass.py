@@ -22,7 +22,7 @@ def delay_us(tus): # use microseconds to improve time resolution
     pass
 
 def halfstep(dir):
-  #dir = +/- 1 for cw or cw respectfully
+  #dir = +/- 1 for ccw or cw respectfully
   global state
   state = state + dir
   if state > 7:
@@ -41,7 +41,24 @@ def turnSteps(steps, dir):
 
 
 class Stepper:
-  pass
+  def __init__(motor):
+
+  def goAngle(angle): #moves to a specified angle
+    #1 step = .703 degrees of an angle
+    #0 and 360 degrees is at the 0 point located at led
+
+    #steps:
+    # 1. read current angle
+    # 2. if desired angle - current angle <= 180 degrees, the move ccw towards angle. if it is > 180 degrees move cw towards final angle
+    # 3. steps required to move angle in ccw direction (direction 0) is (desired angle - current angle) / .703 
+    #3.5 if faster to move other way aka difference greater than 180, steps required is (360 - angle difference)/.703 in direction 0
+    # 4. call turnsteps with direction and number of steps to move to new location
+    # . update current angle
+
+  def zero():
+    #turns motor untl photoresistor is blocked by cardboard
+    
+
 
 
 try:

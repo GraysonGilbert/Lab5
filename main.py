@@ -11,6 +11,7 @@ sequence = [ [1,0,0,0],[1,1,0,0],[0,1,0,0],[0,1,1,0],
       [0,0,1,0],[0,0,1,1],[0,0,0,1],[1,0,0,1] ]
 
 state = 0
+zero = 0
 
 def delay_us(tus): # use microseconds to improve time resolution
   endTime = time.time() + float(tus)/ float(1E6)
@@ -19,14 +20,10 @@ def delay_us(tus): # use microseconds to improve time resolution
 
 class Stepper:
 
-  def __init__(motor,pins):
-    motor.pins = pins
-    motor.sequence = sequence
-    motor.state = state 
+  def __init__(motor,angle):
+    motor.angle = angle
 
-
-
-  def halfstep(dir):
+  def halfstep(motor, dir):
     #dir = +/- 1 for cw or cw respectfully
     global state
     state = state + dir
@@ -46,11 +43,32 @@ class Stepper:
       motor.halfstep(dir)
 
 
-
-
-
-  #def goAngle():
+  def goAngle(motor, new_angle):
     #mve a specified angle, taking the shortest path at a user defined speed
+    #1 step = .703 degrees of an angle
+    #0 and 360 degrees is at the 0 point located at led
+
+    #steps:
+    # 1. read current angle
+    # 2. if desired angle - current angle <= 180 degrees, the move ccw towards angle. if it is > 180 degrees move cw towards final angle
+    # 3. steps required to move angle in ccw direction (direction 0) is (desired angle - current angle) / .703 
+    #3.5 if faster to move other way aka difference greater than 180, steps required is (360 - angle difference)/.703 in direction 0
+    # 4. call turnsteps with direction and number of steps to move to new location
+    # . update current angle
+    angle_diff = motor.angle - new_angle
+    print(angle_diff)
+
+    if angle_diff <= 180:
+      dir = 1
+      steps = int(angle_diff/0.703)
+      motor.turnSteps(steps,dir)
+    if angle_diff > 180:
+      dir = -1
+      steps = int((360 - angle_diff)/.703)
+      motor.turnSteps(steps, dir)
+
+
+
 
   #def zero():
     #Turn the motor until the photoresistor is occluded by the cardboard piece
