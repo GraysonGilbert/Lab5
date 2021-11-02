@@ -135,6 +135,7 @@ myStepper = Stepper(0)
 try:
   myStepper.goAngle(180)
   myStepper.zero(ledPin)
+  print(PCF8591.read(0))
 except KeyboardInterrupt:
   pass
   
