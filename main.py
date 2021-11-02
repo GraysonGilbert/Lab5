@@ -64,7 +64,7 @@ class Stepper:
       motor.turnSteps(steps, dir)
     elif angle_diff <= 180 and angle_diff > 0:
       dir = 1
-      steps = int(angle_diff/0.08789)
+      steps = 8 * int(angle_diff/0.703)
       print("Turning steps")
       motor.turnSteps(steps,dir)
     elif angle_diff > 180:
@@ -73,11 +73,11 @@ class Stepper:
       motor.turnSteps(steps, dir)
     elif angle_diff < 0 and angle_diff >= -180:
       dir = -1
-      steps = (abs(int(360 - angle_diff) / .703))
+      steps = 8 * (abs(int(360 - angle_diff) / .703))
       motor.turnSteps(steps, dir)
     elif angle_diff < -180:
       dir = 1
-      steps = int(angle_diff / 0.703)
+      steps = 8 * int(angle_diff / 0.703)
       motor.turnSteps(steps, dir)
 
 
@@ -92,7 +92,7 @@ class Stepper:
 myStepper = Stepper(0)
 
 try:
-  myStepper.goAngle(180)
+  myStepper.goAngle(225)
 except:
   pass
 GPIO.cleanup() 
