@@ -3,9 +3,6 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 
-
-state = 0
-
 pins = [18,21,22,23] # controller inputs: in1, in2, in3, in4
 for pin in pins:
   GPIO.setup(pin, GPIO.OUT, initial=0)
@@ -13,10 +10,9 @@ for pin in pins:
 sequence = [ [1,0,0,0],[1,1,0,0],[0,1,0,0],[0,1,1,0],
       [0,0,1,0],[0,0,1,1],[0,0,0,1],[1,0,0,1] ]
 
-def delay_us(tus): # use microseconds to improve time resolution
-  endTime = time.time() + float(tus)/ float(1E6)
-  while time.time() < endTime:
-    pass
+state = 0
+
+
 
 class Stepper:
 
@@ -25,6 +21,10 @@ class Stepper:
     motor.sequence = sequence
     motor.state = state 
 
+def delay_us(tus): # use microseconds to improve time resolution
+  endTime = time.time() + float(tus)/ float(1E6)
+  while time.time() < endTime:
+    pass
 
   def halfstep(dir):
     #dir = +/- 1 for cw or cw respectfully
@@ -54,9 +54,14 @@ class Stepper:
     #Turn the motor until the photoresistor is occluded by the cardboard piece
 
 
-try:
-  myStepper = Stepper(pins,sequence,state)
 
+
+
+
+  
+myStepper = Stepper(pins,sequence,state)
+
+try:
   myStepper.turnSteps(4096,1)
 except:
   pass
