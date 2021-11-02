@@ -50,7 +50,7 @@ class PCF8591:
 
 #LED CLASS - used to get photoresistor reading from adc 
 class LedReading:
-  def __init_(led,address):
+  def __init__(led,address):
     led.address = PCF8591(address)
 
   def ledBrightness(led):
