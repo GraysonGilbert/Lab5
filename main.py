@@ -12,7 +12,10 @@ sequence = [ [1,0,0,0],[1,1,0,0],[0,1,0,0],[0,1,1,0],
 
 state = 0
 
-
+def delay_us(tus): # use microseconds to improve time resolution
+  endTime = time.time() + float(tus)/ float(1E6)
+  while time.time() < endTime:
+    pass
 
 class Stepper:
 
@@ -21,10 +24,7 @@ class Stepper:
     motor.sequence = sequence
     motor.state = state 
 
-def delay_us(tus): # use microseconds to improve time resolution
-  endTime = time.time() + float(tus)/ float(1E6)
-  while time.time() < endTime:
-    pass
+
 
   def halfstep(dir):
     #dir = +/- 1 for cw or cw respectfully
@@ -40,7 +40,7 @@ def delay_us(tus): # use microseconds to improve time resolution
     delay_us(1000)
   
 
-  def turnSteps(motor,steps, dir):
+  def turnSteps(motor, steps, dir):
     #move the actuation sequence a given number of half steps
     for step in range(steps):
       motor.halfstep(dir)
