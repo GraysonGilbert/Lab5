@@ -93,6 +93,7 @@ myStepper = Stepper(0)
 
 try:
   myStepper.goAngle(180)
+  myStepper.zero()
 except:
   pass
 GPIO.cleanup() 
