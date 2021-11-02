@@ -129,9 +129,9 @@ class Stepper:
       print(brightness)
       if brightness > 15:
         if motor.angle < 180:
-          motor.turnSteps(1,1)
+          motor.turnSteps(2,1)
         else:
-          motor.turnSteps(1,1)
+          motor.turnSteps(2,1)
       else:
         GPIO.output(pin, 0)
         led_blocked = 1
