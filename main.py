@@ -63,20 +63,20 @@ class Stepper:
       steps = 0
       motor.turnSteps(steps, dir)
     elif angle_diff <= 180 and angle_diff > 0:
-      dir = 1
+      dir = -1
       steps = 8 * int(angle_diff/0.703)
       print("Turning steps")
       motor.turnSteps(steps,dir)
     elif angle_diff > 180:
-      dir = -1
+      dir = 1
       steps = 8 * int((360 - angle_diff)/.703)
       motor.turnSteps(steps, dir)
     elif angle_diff < 0 and angle_diff >= -180:
-      dir = -1
+      dir = 1
       steps = 8 * (abs(int(360 - angle_diff) / .703))
       motor.turnSteps(steps, dir)
     elif angle_diff < -180:
-      dir = 1
+      dir = -1
       steps = 8 * int(angle_diff / 0.703)
       motor.turnSteps(steps, dir)
 
