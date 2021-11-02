@@ -21,6 +21,7 @@ state = 0
 ledPin = 4
 GPIO.setup(ledPin, GPIO.OUT, initial = 0)
 
+#MICROSECOND DELAY FUNCTION
 def delay_us(tus): # use microseconds to improve time resolution
   endTime = time.time() + float(tus)/ float(1E6)
   while time.time() < endTime:
@@ -47,7 +48,13 @@ class PCF8591:
       except Exception as e:
           print ("Error: Device address: 0x%2X \n%s" % (self.address,e))
 
+#LED CLASS - used to get photoresistor reading from adc 
+class LedReading:
+  def __init_(led,address):
+    led.address = PCF8591(address)
 
+  def ledBrightness(led):
+    return led.address.read(0)
 
 
 #STEPPER MOTOR CLASS
@@ -114,13 +121,22 @@ class Stepper:
 
 
   def zero(motor,pin):
-    #Turn the motor until the photoresistor is occluded by the cardboard piece
     GPIO.output(pin, 1)
     time.sleep(.5)
-    def loop(): 
-      PCF8591.setup(0x48)
-      while True:
-        print(PCF8591.read(0))
+    led_blocked = 0
+    while led_blocked == 0:
+      myLed = LedReading(0x48)
+      brightness = myLed.ledBrightness()
+      print(brightness)
+      if brightness > 25:
+        if motor.angle < 180:
+          motor.turnSteps(1,1)
+        else:
+          motor.turnSteps(1,1)
+      else:
+        GPIO.output(pin, 0)
+        led_blocked = 1
+        motor.angle = 0
         
     
         
@@ -132,10 +148,11 @@ class Stepper:
   
 myStepper = Stepper(0)
 
+
 try:
   myStepper.goAngle(180)
   myStepper.zero(ledPin)
-  print(PCF8591.read(0))
+
 except KeyboardInterrupt:
   pass
   
