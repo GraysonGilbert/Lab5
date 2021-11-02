@@ -146,13 +146,15 @@ class Stepper:
 
 
   
-myStepper = Stepper(0)
+
 
 
 try:
+  myStepper = Stepper(0)
   myStepper.goAngle(180)
   myStepper.zero(ledPin)
 
 except KeyboardInterrupt:
   pass
+  GPIO.cleanuo()
   
