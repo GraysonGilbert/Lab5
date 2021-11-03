@@ -110,6 +110,7 @@ class Stepper:
       motor.turnSteps(-steps, -1)
     else:
       motor.turnSteps(steps, 1)
+    motor.angle = new_angle
 
 # Zeros the motor based on the reading from the photoresistor and LED
   def zero(motor,pin):
