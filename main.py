@@ -101,7 +101,7 @@ class Stepper:
     print(angle_diff)
 
     if angle_diff > 180:
-      angle_diff = 360 - angle_diff
+      angle_diff = -(360 - angle_diff)
     if angle_diff < -180:
       angle_diff = 360 + angle_diff
     steps = 8*(int(angle_diff/.703))
@@ -125,7 +125,7 @@ class Stepper:
         if motor.angle < 180:
           motor.turnSteps(4,1)
         else:
-          motor.turnSteps(4,1)
+          motor.turnSteps(4,-1)
       else:
         
         GPIO.output(pin, 0)
