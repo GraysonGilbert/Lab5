@@ -165,7 +165,7 @@ try:
       sub_button = str(data['sub_button'])
       newangle = int(data['slider1'])
     print(data)
-    time.sleep(.1)
+    
     if data != old_data:
       if sub_button == 'Yes, Move Motor to Zero Position':
         myStepper.zero(ledPin)
@@ -175,6 +175,7 @@ try:
         myStepper.goAngle(newangle)
         old_data = data
         ThingSpeakWrite(myStepper.angle)
+    time.sleep(.1)
 
 except:
   pass
