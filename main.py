@@ -107,7 +107,7 @@ class Stepper:
     steps = 8*(int(angle_diff/.703))
 
     if steps < 0:
-      motor.turnSteps(-steps, 11)
+      motor.turnSteps(-steps, 1)
     else:
       motor.turnSteps(steps, -1)
     motor.angle = new_angle
