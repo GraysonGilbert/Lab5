@@ -3,8 +3,11 @@ import RPi.GPIO as GPIO
 import time
 import smbus
 import json
+from urllib.request import urlopen
+from urllib.parse import urlencode
 
-
+#Thingspeak API Code
+api = "6E5CGYMRINBCUCBP"
 
 GPIO.setmode(GPIO.BCM)
 #STEPPER MOTOR SETUP
@@ -118,7 +121,7 @@ class Stepper:
       steps = 8 * int(angle_diff / 0.703)
       motor.turnSteps(steps, dir)
 
-
+# Zeros the motor based on the reading from the photoresistor and LED
   def zero(motor,pin):
     GPIO.output(pin, 1)
     time.sleep(.5)
@@ -140,20 +143,37 @@ class Stepper:
         print(motor.angle)
         
     
-        
 
-    
-
-
-
-  
+def ThingSpeakWrite(angle):
+  parameters = {1: angle, "api_key":api}
+  parameters = urlencode(parameters)
+  url = "https://api.thingspeak.com/update?" + parameters
+  response = urlopen(url)
+  print(response.status, response.reason)
 
 
 
 try:
   myStepper = Stepper(0)
-  myStepper.goAngle(200)
   myStepper.zero(ledPin)
+
+  old_vals = 0
+  while True:
+    with open('step_info.txt', 'r') as f:
+      vals = json.load(f)
+      sub_button = str(vals['sub_button'])
+      new_angle = int(vals['slider1'])
+    print(vals)  
+
+    if(vals != old_vals:
+      if sub_button == 'Yes, Move Motor to Zero Position':
+        myStepper.zero(ledPin)
+        old_vals = vals
+        ThingSpeakWrite(myStepper.angle)
+      if sub_button == 'Yes, Change Angle':
+        myStepper.goAngle(newangle)
+        old_vals = vals
+        ThingSpeakWrite(myStepper.angle)
 
 except KeyboardInterrupt:
   pass
