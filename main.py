@@ -165,13 +165,13 @@ try:
       new_angle = int(vals['slider1'])
     print(vals)  
 
-    if(vals != old_vals:
+    if vals != old_vals:
       if sub_button == 'Yes, Move Motor to Zero Position':
         myStepper.zero(ledPin)
         old_vals = vals
         ThingSpeakWrite(myStepper.angle)
       if sub_button == 'Yes, Change Angle':
-        myStepper.goAngle(newangle)
+        myStepper.goAngle(new_angle)
         old_vals = vals
         ThingSpeakWrite(myStepper.angle)
 

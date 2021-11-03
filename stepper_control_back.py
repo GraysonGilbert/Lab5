@@ -9,11 +9,11 @@ import json
 data =cgi.FieldStorage()
 #Key value variables
 new_angle = data.getvalue("slider1")
-sub_buttom = data.getvalue("sub_button")
+sub_button = data.getvalue("sub_button")
 
 #Dictionary for information to be stored
-info{}
-info{'slider1':new_angle, 'sub_button':sub_button}
+info = {}
+info = {'slider1':new_angle, 'sub_button':sub_button}
 
 #Using Json to write the key values and pass them to a text file
 with open('step_info.txt', 'w') as f:
@@ -26,7 +26,7 @@ print('<form sub_button="/cgi-bin/stepper_control_back.py" method="POST">')
 print('Click button to zero the motor <br>')
 print('<input type="submit" name="sub_button" value= "Yes, Move Motor to Zero Position"><br><br>')
 print('Select a motor angle using the slider. <br>')
-print('input type="range" name="slider1" min="0" max="360" value= "%s" <br>' new_angle)
+print('input type="range" name="slider1" min="0" max="360" value= "%s" <br>' % new_angle)
 print('input type="submit" name="sub_button" vlaue="Yes, Change Angle">')
 print('</form>')
 
