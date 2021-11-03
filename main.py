@@ -176,7 +176,7 @@ try:
         old_data = data
         ThingSpeakWrite(myStepper.angle)
 
-except KeyboardInterrupt:
+except:
   pass
   GPIO.cleanuo()
   
