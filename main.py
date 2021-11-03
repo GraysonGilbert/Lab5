@@ -158,7 +158,7 @@ try:
   time.sleep(1)
   myStepper.zero(ledPin)
 
-  old_data = 0
+  old_data = [0,0]
   while True:
     with open('step_info.txt', 'r') as f:
       data = json.load(f)
