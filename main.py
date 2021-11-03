@@ -155,6 +155,7 @@ def ThingSpeakWrite(angle):
 
 try:
   myStepper = Stepper(0)
+  time.sleep(1)
   myStepper.zero(ledPin)
 
   old_vals = 0
@@ -170,7 +171,7 @@ try:
         myStepper.zero(ledPin)
         old_vals = vals
         ThingSpeakWrite(myStepper.angle)
-      if sub_button == 'Yes, Change Angle':
+      if sub_button == 'Apply Angle':
         myStepper.goAngle(new_angle)
         old_vals = vals
         ThingSpeakWrite(myStepper.angle)
