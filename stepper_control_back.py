@@ -27,7 +27,7 @@ print('Click button to zero the motor <br>')
 print('<input type="submit" name="sub_button" value= "Yes, Move Motor to Zero Position"><br><br>')
 print('Select a motor angle using the slider. <br>')
 print('<input type="range" name="slider1" min="0" max="360" value= "%s"> <br>' %new_angle)
-print('<input type="submit" name="sub_button" vlaue="Yes, Change Angle">')
+print('<input type="submit" name="sub_button" value="Yes, Change Angle">')
 print('</form>')
 
 #ThingSpeak data
