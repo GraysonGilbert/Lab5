@@ -161,7 +161,7 @@ try:
   old_vals = 0
   while True:
     with open('step_info.txt', 'r') as f:
-      vals = json.loads(f)
+      vals = json.load(f)
       sub_button = str(vals['sub_button'])
       newangle = int(vals['slider1'])
     print(vals, newangle, sub_button)
