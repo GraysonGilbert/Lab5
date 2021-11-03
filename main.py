@@ -164,6 +164,7 @@ try:
       data = json.load(f)
       sub_button = str(data['sub_button'])
       newangle = int(data['slider1'])
+      time.sleep(.1)
     print(data)
 
     if data != old_data:
