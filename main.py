@@ -178,5 +178,5 @@ try:
 
 except:
   pass
-  GPIO.cleanuo()
+  GPIO.cleanup()
   
