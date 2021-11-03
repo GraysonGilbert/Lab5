@@ -158,22 +158,22 @@ try:
   time.sleep(1)
   myStepper.zero(ledPin)
 
-  old_vals = 0
+  old_data = 0
   while True:
     with open('step_info.txt', 'r') as f:
-      vals = json.load(f)
-      sub_button = str(vals['sub_button'])
-      newangle = int(vals['slider1'])
-    print(vals, newangle, sub_button)
+      data = json.load(f)
+      sub_button = str(data['sub_button'])
+      newangle = int(data['slider1'])
+    print(data, newangle, sub_button)
 
-    if vals != old_vals:
-      if sub_button == 'Yes, Move Motor to Zero Position':
+    if data != old_data:
+      if sub_button == "Yes, Move Motor to Zero Position":
         myStepper.zero(ledPin)
-        old_vals = vals
+        old_data = data
         ThingSpeakWrite(myStepper.angle)
-      if sub_button == 'Yes, Change Angle':
+      if sub_button == "Yes, Change Angle":
         myStepper.goAngle(newangle)
-        old_vals = vals
+        old_data = data
         ThingSpeakWrite(myStepper.angle)
 
 except KeyboardInterrupt:
