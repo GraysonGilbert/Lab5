@@ -16,7 +16,7 @@ info = {}
 info = {'slider1':new_angle, 'sub_button':sub_button}
 
 #Using Json to write the key values and pass them to a text file
-with open('step_info.txt', 'w', encoding='utf-8') as f:
+with open('step_info.txt', 'w') as f:
   json.dump(info, f)
 
 #Creating a screen with a slider, buttons, and prompts on screen
