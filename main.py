@@ -172,7 +172,7 @@ try:
         myStepper.zero(ledPin)
         old_data = data
         ThingSpeakWrite(myStepper.angle)
-      if sub_button == 'Submit':
+      if sub_button == 'Yes, Change Angle':
         myStepper.goAngle(newangle)
         old_data = data
         ThingSpeakWrite(myStepper.angle)
