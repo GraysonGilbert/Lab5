@@ -167,7 +167,7 @@ try:
     print(vals)  
 
     if vals != old_vals:
-      if sub_button == 'Yes, Move Motor to Zero Position':
+      if sub_button == 'Submit':
         myStepper.zero(ledPin)
         old_vals = vals
         ThingSpeakWrite(myStepper.angle)
