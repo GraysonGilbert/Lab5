@@ -163,8 +163,8 @@ try:
     with open('step_info.txt', 'r') as f:
       vals = json.load(f)
       sub_button = str(vals['sub_button'])
-      new_angle = int(vals['slider1'])
-    print(vals)  
+      newangle = int(vals['slider1'])
+    print(vals, newangle, sub_button)
 
     if vals != old_vals:
       if sub_button == 'Yes, Move Motor to Zero Position':
@@ -172,7 +172,7 @@ try:
         old_vals = vals
         ThingSpeakWrite(myStepper.angle)
       if sub_button == 'Yes, Change Angle':
-        myStepper.goAngle(new_angle)
+        myStepper.goAngle(newangle)
         old_vals = vals
         ThingSpeakWrite(myStepper.angle)
 
