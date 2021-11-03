@@ -164,9 +164,8 @@ try:
       data = json.load(f)
       sub_button = str(data['sub_button'])
       newangle = int(data['slider1'])
-      time.sleep(.1)
     print(data)
-
+    time.sleep(.1)
     if data != old_data:
       if sub_button == 'Yes, Move Motor to Zero Position':
         myStepper.zero(ledPin)
