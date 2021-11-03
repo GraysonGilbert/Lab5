@@ -177,7 +177,7 @@ try:
         ThingSpeakWrite(myStepper.angle)
     time.sleep(.1)
 
-except:
+except KeyboardInterrupt:
   pass
   GPIO.cleanup()
   
