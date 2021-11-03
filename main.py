@@ -107,9 +107,9 @@ class Stepper:
     steps = 8*(int(angle_diff/.703))
 
     if steps < 0:
-      motor.turnSteps(-steps, -1)
+      motor.turnSteps(-steps, 11)
     else:
-      motor.turnSteps(steps, 1)
+      motor.turnSteps(steps, -1)
     motor.angle = new_angle
 
 # Zeros the motor based on the reading from the photoresistor and LED
