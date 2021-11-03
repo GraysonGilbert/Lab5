@@ -100,31 +100,16 @@ class Stepper:
     angle_diff = new_angle - motor.angle
     print(angle_diff)
 
-    if angle_diff == 360 or angle_diff == -360:
-      dir = 1
-      steps = 0
-      motor.turnSteps(steps, dir)
-      motor.angle = new_angle
-    elif angle_diff <= 180 and angle_diff > 0:
-      dir = -1
-      steps = 8 * int(angle_diff/0.703)
-      motor.turnSteps(steps,dir)
-      motor.angle = new_angle
-    elif angle_diff > 180:
-      dir = 1
-      steps = 8 * int((360 - angle_diff)/.703)
-      motor.turnSteps(steps, dir)
-      motor.angle = new_angle
-    elif angle_diff < 0 and angle_diff >= -180:
-      dir = 1
-      steps = 8 * (abs(int(360 - angle_diff) / .703))
-      motor.turnSteps(steps, dir)
-      motor.angle = new_angle
-    elif angle_diff < -180:
-      dir = -1
-      steps = 8 * int(angle_diff / 0.703)
-      motor.turnSteps(steps, dir)
-      motor.angle = new_angle
+    if angle_diff > 180:
+      angle_diff = 360 - angle_diff
+    if angle_diff < -180:
+      angle_diff = 360 + angle_diff
+    steps = 8*(int(angle_diff/.703))
+
+    if steps < 0:
+      motor.turnSteps(-steps, -1)
+    else:
+      motor.turnSteps(steps, 1)
 
 # Zeros the motor based on the reading from the photoresistor and LED
   def zero(motor,pin):
