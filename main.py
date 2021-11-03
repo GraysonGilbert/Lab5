@@ -160,14 +160,14 @@ try:
 
   old_data = 0
   while True:
-    with open("step_info.txt", 'r') as f:
+    with open('step_info.txt', 'r') as f:
       data = json.load(f)
       sub_button = str(data['sub_button'])
       newangle = int(data['slider1'])
-    print(data, newangle, sub_button)
+    print(data)
 
     if data != old_data:
-      if sub_button == 'Submit':
+      if sub_button == 'Yes, Move Motor to Zero Position':
         myStepper.zero(ledPin)
         old_data = data
         ThingSpeakWrite(myStepper.angle)
