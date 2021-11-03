@@ -16,7 +16,7 @@ info = {}
 info = {'slider1':new_angle, 'sub_button':sub_button}
 
 #Using Json to write the key values and pass them to a text file
-with open('step_info.txt', 'w') as f:
+with open('step_info.txt', 'w', encoding='utf-8') as f:
   json.dump(info, f)
 
 #Creating a screen with a slider, buttons, and prompts on screen
@@ -34,6 +34,6 @@ print('</form>')
 
 print('<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1557663/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&api_key=FH792VSHNOH9T7EQ&results=60&timescale=15&title=Motor+Angle+Vs+Time&type=line&xaxis=Time+%28s%29&yaxis=Motor+Angle"></iframe>')
 print('</iframe>')
-print('<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1557663/widgets/375618&api_key=YQGPVAIV40COO0YU"></iframe>')
-print('</iframe>')
+print('<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1557663/widgets/375698"></iframe>')
+
 print('</html')

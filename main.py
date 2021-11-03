@@ -160,7 +160,7 @@ try:
 
   old_data = 0
   while True:
-    with open('step_info.txt', 'r') as f:
+    with open("step_info.txt", encoding='utf-8') as f:
       data = json.load(f)
       sub_button = str(data['sub_button'])
       newangle = int(data['slider1'])
